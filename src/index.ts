@@ -63,7 +63,7 @@ const textEventHandler = async (
 
 // Route handler to receive webhook events.
 // This route is used to receive connection tests.
-app.get('/', async (_: Request, res: Response): Promise<Response> => {
+app.get('/api', async (_: Request, res: Response): Promise<Response> => {
   return res.status(200).json({
     status: 'success',
     message: 'Connected successfully!',
@@ -72,7 +72,7 @@ app.get('/', async (_: Request, res: Response): Promise<Response> => {
 
 // This route is used for the Webhook.
 app.post(
-  '/webhook',
+  '/api/webhook',
   middleware(middlewareConfig),
   async (req: Request, res: Response): Promise<Response> => {
     const events: WebhookEvent[] = req.body.events;
