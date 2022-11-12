@@ -108,6 +108,6 @@ if (process.env.NODE_ENV == 'development') {
   app.listen(PORT, () => {
     console.log(`Application is live and listening on port ${PORT}`);
   });
-} else {
-  module.exports = app;
 }
+
+module.exports = app;
