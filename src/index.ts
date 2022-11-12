@@ -10,6 +10,11 @@ import {
 } from '@line/bot-sdk';
 import express, { Application, Request, Response } from 'express';
 
+if ((process.env.NODE_ENV = 'development')) {
+  const dotenv = require('dotenv');
+  dotenv.config();
+}
+
 // Setup all LINE client and Express configurations.
 const clientConfig: ClientConfig = {
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN || '',
