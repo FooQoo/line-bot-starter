@@ -1,7 +1,7 @@
 // Import all dependencies, mostly using destructuring for better view.
 import { middleware, MiddlewareConfig, WebhookEvent } from '@line/bot-sdk';
 import express, { Application, Request, Response } from 'express';
-import { textEventHandler } from './line/textEventHandler';
+import { textEventHandler } from './lib/line/textEventHandler';
 
 if ((process.env.NODE_ENV = 'development')) {
   const dotenv = require('dotenv');
