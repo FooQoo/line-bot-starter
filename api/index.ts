@@ -35,13 +35,6 @@ app.get(basePath, async (_: Request, res: Response): Promise<Response> => {
   });
 });
 
-//
-//
-
-//
-
-//
-
 // This route is used for the Webhook.
 app.post(
   `${basePath}/webhook`,
