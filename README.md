@@ -36,3 +36,7 @@ https://example-url.com/webhook
 ```bash
 yarn start
 ```
+
+## Reference
+
+- https://github.com/line/line-bot-sdk-nodejs/tree/next/examples/echo-bot-ts
