@@ -13,7 +13,7 @@
     "simple-import-sort/exports": "error"
   },
   "parserOptions": {
-    "ecmaVersion" : 2018,
+    "ecmaVersion" : 2021,
     "sourceType"  : "module"
   }
 }
