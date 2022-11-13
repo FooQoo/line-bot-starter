@@ -13,6 +13,7 @@
     "format": "prettier --write 'api/**/*.{js,ts,json}'",
     "prepare": "husky install"
   },
+  "license": "MIT",
   "author": "FooQoo",
   "dependencies": {
     "@line/bot-sdk": "^7.3.0",
