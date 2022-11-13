@@ -8,6 +8,7 @@ if ((process.env.NODE_ENV = 'development')) {
   dotenv.config();
 }
 
+// middleware config
 const middlewareConfig: MiddlewareConfig = {
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
   channelSecret: process.env.CHANNEL_SECRET || '',
