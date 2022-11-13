@@ -1,25 +1,12 @@
 // Import all dependencies, mostly using destructuring for better view.
-import {
-  ClientConfig,
-  Client,
-  middleware,
-  MiddlewareConfig,
-  WebhookEvent,
-  TextMessage,
-  MessageAPIResponseBase,
-} from '@line/bot-sdk';
+import { middleware, MiddlewareConfig, WebhookEvent } from '@line/bot-sdk';
 import express, { Application, Request, Response } from 'express';
+import { textEventHandler } from './line/textEventHandler';
 
 if ((process.env.NODE_ENV = 'development')) {
   const dotenv = require('dotenv');
   dotenv.config();
 }
-
-// Setup all LINE client and Express configurations.
-const clientConfig: ClientConfig = {
-  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN || '',
-  channelSecret: process.env.CHANNEL_SECRET,
-};
 
 const middlewareConfig: MiddlewareConfig = {
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
@@ -28,34 +15,10 @@ const middlewareConfig: MiddlewareConfig = {
 
 const PORT = process.env.PORT || 3000;
 
-// Create a new LINE SDK client.
-const client = new Client(clientConfig);
-
 // Create a new Express application.
 const app: Application = express();
 
-// Function handler to receive the text.
-const textEventHandler = async (
-  event: WebhookEvent
-): Promise<MessageAPIResponseBase | undefined> => {
-  // Process all variables here.
-  if (event.type !== 'message' || event.message.type !== 'text') {
-    return;
-  }
-
-  // Process all message related variables here.
-  const { replyToken } = event;
-  const { text } = event.message;
-
-  // Create a new message.
-  const response: TextMessage = {
-    type: 'text',
-    text,
-  };
-
-  // Reply to the user.
-  await client.replyMessage(replyToken, response);
-};
+const basePath = '/api';
 
 // Register the LINE middleware.
 // As an alternative, you could also pass the middleware in the route handler, which is what is used here.
@@ -63,7 +26,7 @@ const textEventHandler = async (
 
 // Route handler to receive webhook events.
 // This route is used to receive connection tests.
-app.get('/api', async (_: Request, res: Response): Promise<Response> => {
+app.get(basePath, async (_: Request, res: Response): Promise<Response> => {
   return res.status(200).json({
     status: 'success',
     message: 'Connected successfully!',
@@ -72,7 +35,7 @@ app.get('/api', async (_: Request, res: Response): Promise<Response> => {
 
 // This route is used for the Webhook.
 app.post(
-  '/api/webhook',
+  `${basePath}/webhook`,
   middleware(middlewareConfig),
   async (req: Request, res: Response): Promise<Response> => {
     const events: WebhookEvent[] = req.body.events;
