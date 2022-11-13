@@ -7,5 +7,5 @@ declare global {
     }
   }
 }
-
+// hogehoge
 export {};

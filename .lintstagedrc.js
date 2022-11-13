@@ -1,11 +1,4 @@
-const path = require("path");
-
-const buildEslintCommand = (filenames) =>
-  `eslint --fix --file ${filenames
-    .map((f) => path.relative(process.cwd(), f))
-    .join(" --file ")}`;
-
 module.exports = {
-  "*.{js,jsx,ts,tsx}": [buildEslintCommand],
-  "*": ["yarn format"],
-};
+  '*.{js,ts}': ["yarn lint:fix"],
+  '*': ['yarn format']
+}
